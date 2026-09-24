@@ -858,3 +858,278 @@ h3{
     font-size:9px;
   }
 }
+
+/* =====================================================
+   SUBTLE 3D GLASS EFFECT
+   AJ HELPDESK
+===================================================== */
+
+/* Glass panels get depth */
+.glass{
+  position:relative;
+  overflow:hidden;
+
+  transform-style:preserve-3d;
+
+  transition:
+    transform .35s cubic-bezier(.2,.8,.2,1),
+    box-shadow .35s ease,
+    border-color .35s ease,
+    background .35s ease;
+}
+
+
+/* Soft glass reflection */
+.glass::before{
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.18),
+      rgba(255,255,255,.04) 35%,
+      transparent 60%
+    );
+
+  opacity:.55;
+
+  pointer-events:none;
+
+  z-index:0;
+}
+
+
+/* Keep actual content above reflection */
+.glass > *{
+  position:relative;
+  z-index:1;
+}
+
+
+/* =====================================================
+   3D CARD FLOAT
+===================================================== */
+
+.card{
+  transform:
+    perspective(1000px)
+    translateZ(0);
+
+  transform-style:preserve-3d;
+}
+
+.card:hover{
+  transform:
+    perspective(1000px)
+    translateY(-7px)
+    translateZ(8px)
+    rotateX(1deg)
+    rotateY(-1deg);
+
+  box-shadow:
+    0 28px 60px rgba(37,99,235,.14),
+    0 10px 28px rgba(0,0,0,.08);
+}
+
+
+/* =====================================================
+   HERO CARD 3D
+===================================================== */
+
+.hero-card{
+  transform:
+    perspective(1200px)
+    translateZ(0);
+
+  transform-style:preserve-3d;
+}
+
+.hero-card:hover{
+  transform:
+    perspective(1200px)
+    translateY(-5px)
+    translateZ(6px);
+
+  box-shadow:
+    0 30px 70px rgba(37,99,235,.15),
+    0 0 35px rgba(6,182,212,.07);
+}
+
+
+/* =====================================================
+   CARD ICON FLOAT
+===================================================== */
+
+.card-icon{
+  transform:
+    translateZ(12px);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.card:hover .card-icon{
+  transform:
+    translateZ(20px)
+    translateY(-2px);
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,.12);
+}
+
+
+/* =====================================================
+   BUTTON 3D
+===================================================== */
+
+.btn{
+  transform:
+    translateZ(0);
+
+  box-shadow:
+    0 3px 0 rgba(0,0,0,.06);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.btn:hover{
+  transform:
+    translateY(-3px)
+    translateZ(4px);
+
+  box-shadow:
+    0 8px 18px rgba(37,99,235,.15);
+}
+
+.btn:active{
+  transform:
+    translateY(1px);
+
+  box-shadow:
+    0 2px 5px rgba(0,0,0,.10);
+}
+
+
+/* =====================================================
+   LOGO DEPTH
+===================================================== */
+
+.logo{
+  transform:
+    translateZ(10px);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+
+.logo:hover{
+  transform:
+    translateY(-2px)
+    translateZ(15px)
+    rotate(-2deg);
+
+  box-shadow:
+    0 14px 32px rgba(37,99,235,.30);
+}
+
+
+/* =====================================================
+   NAVBAR FLOAT
+===================================================== */
+
+.navbar{
+  transform:
+    translateZ(0);
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease;
+}
+
+.navbar:hover{
+  box-shadow:
+    0 20px 55px rgba(37,99,235,.12);
+}
+
+
+/* =====================================================
+   LIST ITEM DEPTH
+===================================================== */
+
+.list > div,
+.list a,
+.list li{
+  transform:
+    translateZ(0);
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+.list > div:hover,
+.list a:hover,
+.list li:hover{
+  transform:
+    translateX(4px)
+    translateZ(5px);
+}
+
+
+/* =====================================================
+   DARK MODE EXTRA DEPTH
+===================================================== */
+
+html[data-theme="dark"] .card:hover,
+html[data-theme="dark"] .hero-card:hover{
+  box-shadow:
+    0 30px 70px rgba(0,0,0,.42),
+    0 0 35px rgba(37,99,235,.12),
+    0 0 18px rgba(6,182,212,.06);
+}
+
+
+/* =====================================================
+   MOBILE
+   Disable tilt-like movement on touch screens
+===================================================== */
+
+@media(max-width:900px){
+
+  .card:hover{
+    transform:
+      translateY(-5px);
+  }
+
+  .hero-card:hover{
+    transform:
+      translateY(-4px);
+  }
+
+}
+
+
+/* =====================================================
+   REDUCE MOTION ACCESSIBILITY
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    transition:none !important;
+    animation:none !important;
+    transform:none !important;
+  }
+
+}
